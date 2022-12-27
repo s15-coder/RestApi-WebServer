@@ -10,7 +10,10 @@ const {
 const {
   validateFields,
   validatePagination,
-} = require("../middlewares/validate-fields");
+  validateJwt,
+  isAdminRole,
+  hasRole,
+} = require("../middlewares");
 
 const router = Router();
 
@@ -45,6 +48,9 @@ router.put(
 router.delete(
   "/:id",
   [
+    validateJwt,
+    // isAdminRole,
+    hasRole("ADMIN_ROLE", "USER_ROLE"),
     param("id", "Is not a valid MongoId").isMongoId(),
     param("id").custom(existsUserInDB),
     validateFields,

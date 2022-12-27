@@ -1,9 +1,7 @@
 const { response, request } = require("express");
-const { validationResult } = require("express-validator");
 
 const User = require("../models/user");
-const { isUniqueEmailError } = require("../helpers/validations");
-const { encryptPassword } = require("../helpers/password");
+const { isUniqueEmailError ,encryptPassword} = require("../helpers");
 const {
   SERVER_ERROR_CODE,
   BAD_REQUEST_CODE,
@@ -35,7 +33,7 @@ const usersDelete = async (req = request, res = response) => {
     { active: false },
     { new: true }
   );
-  res.json({
+  return res.json({
     userRemoved,
   });
 };

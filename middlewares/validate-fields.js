@@ -8,6 +8,7 @@ const validateFields = (req, res, next) => {
   }
   next();
 };
+
 const validatePagination = (req, res, next) => {
   let { limit, page } = req.query;
   if (isNaN(limit)) {
